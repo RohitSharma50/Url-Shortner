@@ -65,8 +65,8 @@ export default function DeviceStats({ stats }) {
               {result.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
+                  fill={COLORS[index % COLORS.length] } 
+                /> 
               ))}
             </Pie>
           </PieChart>
@@ -75,10 +75,9 @@ export default function DeviceStats({ stats }) {
       <div className="flex flex-wrap justify-center mt-4">
         {result.map(({ device, count }) => (
           <div key={device} className="text-center m-2">
-            <span className="block font-medium">{device}</span>
-            <span className="block">
-              {((count / stats.length) * 100).toFixed(2)}%
+            <span className="block font-medium">{device} - {((count / stats.length) * 100).toFixed(2)}%
             </span>
+            
           </div>
         ))}
       </div>

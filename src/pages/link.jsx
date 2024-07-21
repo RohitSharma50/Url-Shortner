@@ -65,8 +65,13 @@ function replaceDashboardWithID(id, short_url) {
 
   useEffect(() => {
     fn();
-    fnStats();
+    
   }, []);
+
+  useEffect(() => {
+    if(!error && loading === false) fnStats();
+  }, [loading,error]);
+
 
   if(error){
     navigate("/dashboard");
@@ -80,12 +85,9 @@ function replaceDashboardWithID(id, short_url) {
  
 
   return (  
-   
-    
     <>    
-
          {(loading || loadingStats) && (<BarLoader width={"100%"} color="#36d7b7" />)}
-       <div className="flex flex-col gap-8 sm:flex-row justify-between">
+       <div className="flex flex-row gap-8 max-xl:flex-col justify-between">
        <div className="flex flex-col items-start gap-8 rounded-lg sm:w-2/5">
              <span className="text-4xl font-extrabold  cursor-pointer">{url?.title}</span> 
         <a 
@@ -120,17 +122,26 @@ function replaceDashboardWithID(id, short_url) {
                 <Download />
              </Button>
 
-             <Button 
-             variant="ghost"
-              onClick={()=>fnDelete()}>
-               {loadingDelete? <BeatLoader size={5} color="white"/> : <Trash />} 
-               
-             </Button>
+             <Button
+              variant="ghost"
+              onClick={() =>
+                fnDelete().then(() => {
+                  navigate("/dashboard");
+                })
+              }
+              disable={loadingDelete}
+            >
+              {loadingDelete ? (
+                <BeatLoader size={5} color="white" />
+              ) : (
+                <Trash />
+              )}
+            </Button>
              </div>
              <img 
         src={url?.qr} 
         alt="Qr code"
-        className="w-full self-centersm:self-start ring-blue-500 p-1 object-contain"
+        className="w-11/12 self-centersm:self-start ring-blue-500 p-1 "
         />
         </div>
         <Card className="sm:w-3/5">

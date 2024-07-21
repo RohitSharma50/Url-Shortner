@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-
 import {BarLoader} from 'react-spinners'
 import {
   Card,
@@ -8,7 +7,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
  import {Input} from "../components/ui/input";
-//  import {Button} from "../components/ui/button";
  import {Filter} from "lucide-react";
  import Error from "@/components/error"
  import {UrlState} from "@/context";
@@ -19,8 +17,7 @@ import {
  import {CreateLink} from "@/components/ui/create-link";
  
  const Dashboard = () => {
-//   const currentUrl = window.location.href;
-// console.log(currentUrl);
+
 const [searchQuery, setSearchQuery] = useState("")
 
 const {user} = UrlState();
@@ -46,12 +43,6 @@ useEffect(()=>{
 
 const filterUrls = urls?.filter((url)=>
 url.title.toLowerCase().includes(searchQuery.toLowerCase()))
-
-
-
-
-
-
 
 
   return ( 

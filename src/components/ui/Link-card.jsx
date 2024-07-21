@@ -33,7 +33,7 @@ const downloadImage=()=>{
     document.body.removeChild(anchor);
 }
 
-     const {loading: loadingDelete, fn: fnDelete}=useFetch(deleteUrl, url.id);
+     const {loading: loadingDelete, fn: fnDelete}=useFetch(deleteUrl, url?.id);
 
      const newLink = useMemo(() => (url ? replaceDashboardWithID(url?.custom_url ? url?.custom_url : url.short_url) : ""), [url]);
 
@@ -75,7 +75,8 @@ const downloadImage=()=>{
 
              <Button 
              variant="ghost"
-              onClick={()=>fnDelete().then(()=>fetchUrls())} >
+              onClick={()=>fnDelete().then(()=>fetchUrls())} 
+              >
                {loadingDelete? <BeatLoader size={5} color="white"/> : <Trash />} 
                
              </Button>
